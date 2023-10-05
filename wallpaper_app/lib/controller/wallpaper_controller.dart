@@ -9,7 +9,7 @@ class wallPaperController extends ChangeNotifier {
 
   bool search = false;
 
-  int platform = 0;
+  int platform = AsyncWallpaper.HOME_SCREEN;
 
   searchbar() {
     search = !search;

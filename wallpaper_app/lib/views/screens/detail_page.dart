@@ -59,6 +59,52 @@ class DetailPage extends StatelessWidget {
               ),
               Spacer(),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.comment,
+                        size: 35,
+                        color: Color(0xff141E46),
+                      ),
+                      Text("${wallpaper.comments}"),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        CupertinoIcons.heart_fill,
+                        size: 35,
+                        color: Color(0xff141E46),
+                      ),
+                      Text("${wallpaper.likes}"),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.download,
+                        size: 35,
+                        color: Color(0xff141E46),
+                      ),
+                      Text("${wallpaper.downloads}"),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Icon(
+                        Icons.remove_red_eye,
+                        size: 35,
+                        color: Color(0xff141E46),
+                      ),
+                      Text("${wallpaper.views}"),
+                    ],
+                  ),
+                ],
+              ),
+              Spacer(),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
@@ -123,7 +169,7 @@ class DetailPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Icon(Icons.list),
+                    child: Icon(Icons.wallpaper),
                   ),
                 ],
               ),

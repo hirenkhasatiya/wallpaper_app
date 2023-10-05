@@ -86,41 +86,49 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    CarouselSlider.builder(
-                      itemCount: Provider.allwallpapers.length,
-                      options: CarouselOptions(
-                          initialPage: 1,
-                          autoPlay: true,
-                          pageSnapping: true,
-                          enableInfiniteScroll: true,
-                          animateToClosest: true,
-                          enlargeCenterPage: true),
-                      itemBuilder: (BuildContext context, index, realIndex) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushNamed("Detail_Page",
-                                arguments: Provider.allwallpapers[index]);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: NetworkImage(
-                                      Provider
-                                          .allwallpapers[index].largeImageUrl,
-                                    ),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 6,
-                                      spreadRadius: 3,
-                                      offset: Offset(3, 2)),
-                                ]),
+                    (Provider.allwallpapers.isEmpty)
+                        ? Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: CircularProgressIndicator(
+                              color: Color(0xff141E46),
+                            ),
+                          )
+                        : CarouselSlider.builder(
+                            itemCount: Provider.allwallpapers.length,
+                            options: CarouselOptions(
+                                initialPage: 1,
+                                autoPlay: true,
+                                pageSnapping: true,
+                                enableInfiniteScroll: true,
+                                animateToClosest: true,
+                                enlargeCenterPage: true),
+                            itemBuilder:
+                                (BuildContext context, index, realIndex) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed("Detail_Page",
+                                      arguments: Provider.allwallpapers[index]);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                            Provider.allwallpapers[index]
+                                                .largeImageUrl,
+                                          ),
+                                          fit: BoxFit.cover),
+                                      borderRadius: BorderRadius.circular(20),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 6,
+                                            spreadRadius: 3,
+                                            offset: Offset(3, 2)),
+                                      ]),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
                     SizedBox(
                       height: 20,
                     ),
