@@ -1,5 +1,8 @@
+import 'dart:ui';
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:wallpaper_app/controller/wallpaper_controller.dart';
 import 'package:wallpaper_app/modal/wallpaper_modal.dart';
@@ -34,7 +37,7 @@ class DetailPage extends StatelessWidget {
           centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 25),
+          padding: const EdgeInsets.only(top: 25, left: 18, right: 18),
           child: Column(
             children: [
               Center(
@@ -54,6 +57,77 @@ class DetailPage extends StatelessWidget {
                           fit: BoxFit.cover)),
                 ),
               ),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FloatingActionButton(
+                    backgroundColor: Color(0xff141E46),
+                    foregroundColor: Colors.white,
+                    onPressed: () {
+                      Provider.setWallpaper(link: wallpaper.largeImageUrl);
+                    },
+                    child: Icon(Icons.done),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: Color(0xff141E46),
+                    foregroundColor: Colors.white,
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Container(
+                          height: 180,
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              RadioListTile(
+                                title: const Text("Home Screen"),
+                                activeColor: Color(0xff141E46),
+                                value: AsyncWallpaper.HOME_SCREEN,
+                                onChanged: (val) {
+                                  Provider.platformchange(
+                                    platform: val!,
+                                  );
+                                },
+                                groupValue: Provider.platform,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                              ),
+                              RadioListTile(
+                                title: const Text("Lock Screen"),
+                                activeColor: Color(0xff141E46),
+                                value: AsyncWallpaper.LOCK_SCREEN,
+                                onChanged: (val) {
+                                  Provider.platformchange(platform: val!);
+                                },
+                                groupValue: Provider.platform,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                              ),
+                              RadioListTile(
+                                title: const Text("Both Screen"),
+                                activeColor: Color(0xff141E46),
+                                value: AsyncWallpaper.BOTH_SCREENS,
+                                onChanged: (val) {
+                                  Provider.platformchange(platform: val!);
+                                },
+                                groupValue: Provider.platform,
+                                controlAffinity:
+                                    ListTileControlAffinity.trailing,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    child: Icon(Icons.list),
+                  ),
+                ],
+              ),
+              Spacer(),
             ],
           ),
         ),
